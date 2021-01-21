@@ -1,18 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, SafeAreaView, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+
+import ITEMS from '../utils/ITEMS';
 
 const BRANDS = [
-  'Test1',
-  'Test2',
-  'Test3',
-  'Test4',
-  'Test5',
-  'Test6',
-  'Test7',
-  'Test8',
+  'Brand1',
+  'Brand2',
+  'Brand3',
+  'Brand4',
+  'Brand5',
+  'Brand6',
+  'Brand7',
+  'Brand8',
 ];
 
 const Home = () => {
+  const [currentItems, setCurrentItems] = useState();
+
+  const handleBrandPress = (item) => {
+    setCurrentItems(ITEMS[item]);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>LIMITD</Text>
@@ -22,16 +35,23 @@ const Home = () => {
         data={BRANDS}
         horizontal
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <Text style={styles.brandItem}>{item}</Text>}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleBrandPress(item)}>
+            <Text style={styles.brandItem}>{item}</Text>
+          </TouchableOpacity>
+        )}
         showsHorizontalScrollIndicator={false}
       />
+      <Text>
+        {currentItems ? currentItems.shoes[1].name : 'Please select a brand'}
+      </Text>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 25,
+    paddingTop: 40,
     paddingHorizontal: 15,
   },
   header: {
@@ -39,8 +59,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    borderTopWidth: 1,
-    borderTopColor: 'black',
   },
   brandsHeader: {
     textAlign: 'center',
