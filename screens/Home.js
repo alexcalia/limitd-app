@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import BRANDS from '../utils/BRANDS';
 
@@ -31,14 +32,17 @@ const Home = () => {
         showsHorizontalScrollIndicator={false}
       />
       <FlatList
-        style={styles.itemsList}
+        contentContainerStyle={styles.itemsList}
         data={currentItems}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.itemBox}>
-            <Text style={styles.brandItem}>{item.name}</Text>
-            <Text style={styles.brandItem}>{item.price}</Text>
-            <Text style={styles.brandItem}>{item.description}</Text>
+            <Text style={[styles.itemText, styles.itemHeader]}>
+              {item.name}
+            </Text>
+            <View style={styles.itemImage} />
+            <Text style={styles.itemText}>${item.price}</Text>
+            <Text style={styles.itemText}>{item.description}</Text>
           </TouchableOpacity>
         )}
       />
@@ -70,6 +74,21 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   itemBox: {
+    marginBottom: 15,
+  },
+  itemsList: {
+    alignItems: 'center',
+  },
+  itemImage: {
+    height: 300,
+    width: 200,
+    backgroundColor: 'teal',
+    marginBottom: 5,
+  },
+  itemText: {
+    textAlign: 'center',
+  },
+  itemHeader: {
     marginBottom: 10,
   },
 });
