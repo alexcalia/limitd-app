@@ -6,25 +6,13 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-
-import ITEMS from '../utils/ITEMS';
-
-const BRANDS = [
-  'Brand1',
-  'Brand2',
-  'Brand3',
-  'Brand4',
-  'Brand5',
-  'Brand6',
-  'Brand7',
-  'Brand8',
-];
+import BRANDS from '../utils/BRANDS';
 
 const Home = () => {
   const [currentItems, setCurrentItems] = useState();
 
   const handleBrandPress = (item) => {
-    setCurrentItems(ITEMS[item]);
+    setCurrentItems(item);
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -34,10 +22,10 @@ const Home = () => {
         style={styles.brandList}
         data={BRANDS}
         horizontal
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleBrandPress(item)}>
-            <Text style={styles.brandItem}>{item}</Text>
+          <TouchableOpacity onPress={() => handleBrandPress(item.data)}>
+            <Text style={styles.brandItem}>{item.name}</Text>
           </TouchableOpacity>
         )}
         showsHorizontalScrollIndicator={false}
