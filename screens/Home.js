@@ -30,9 +30,18 @@ const Home = () => {
         )}
         showsHorizontalScrollIndicator={false}
       />
-      <Text>
-        {currentItems ? currentItems.shoes[1].name : 'Please select a brand'}
-      </Text>
+      <FlatList
+        style={styles.itemsList}
+        data={currentItems}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.itemBox}>
+            <Text style={styles.brandItem}>{item.name}</Text>
+            <Text style={styles.brandItem}>{item.price}</Text>
+            <Text style={styles.brandItem}>{item.description}</Text>
+          </TouchableOpacity>
+        )}
+      />
     </SafeAreaView>
   );
 };
@@ -56,6 +65,12 @@ const styles = StyleSheet.create({
   },
   brandItem: {
     paddingHorizontal: 10,
+  },
+  brandList: {
+    marginBottom: 20,
+  },
+  itemBox: {
+    marginBottom: 10,
   },
 });
 
