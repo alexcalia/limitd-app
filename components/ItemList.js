@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Text,
-  View,
-} from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
+import ItemPreview from './ItemPreview';
 
 const ItemList = ({ items }) => {
   return (
@@ -14,12 +9,7 @@ const ItemList = ({ items }) => {
       data={items}
       keyExtractor={(item) => item.name}
       renderItem={({ item }) => (
-        <TouchableOpacity style={styles.itemBox}>
-          <Text style={[styles.itemText, styles.itemHeader]}>{item.name}</Text>
-          <View style={styles.itemImage} />
-          <Text style={styles.itemText}>${item.price}</Text>
-          <Text style={styles.itemText}>{item.description}</Text>
-        </TouchableOpacity>
+        <ItemPreview style={styles.itemBox} item={item} />
       )}
     />
   );
